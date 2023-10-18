@@ -1,0 +1,50 @@
+ 
+FROM time module IMPORT sleep
+IMPORT pandas module AS PD
+
+DEFINE FUNCTION delete()
+    WHILE True
+        OUTPUT "This section is for deleting your data"
+        OUTPUT "1: delete"
+        OUTPUT "2: return to main menu"
+        SEND "Please select your option"
+        RECIEVE option FROM int
+            IF OPTION == 1
+            OPEN data.csv
+            SEND "Are you sure? (Y for yes and N for no)"
+            RECIEVE confirm FROM str
+                IF confirm == "Y"
+                    DELETE data.csv
+                    RETURN TO main_menu()
+                ELSIF confirm = "N"
+                    RETURN TO delete()
+                ELSE
+                    OUPUT "Invalid input"
+            ELSIF OPTION == 2
+                RETURN TO main_menu()
+            ELSE
+                OUTPUT "Invalid input, answer should be 1 or 2"
+
+DEFINE FUNCTION  save()
+    WHILE True
+        OUTPUT "This section is for saving your data"
+        OUTPUT "1: save"
+        OUTPUT "2: return to main menu"
+        SEND "Please select your option"
+        RECIEVE option FROM int
+            IF OPTION == 1
+            OPEN data.csv
+            SEND "Are you sure? (Y for yes and N for no)"
+            RECIEVE confirm FROM str
+                IF confirm == "Y"
+                    SAVE data.csv
+                    RETURN TO main_menu()
+                ELSIF confirm = "N"
+                    RETURN TO save()
+                ELSE
+                    OUPUT "Invalid input"
+            ELSIF OPTION == 2
+                RETURN TO main_menu()
+            ELSE
+                OUTPUT "Invalid input, answer should be 1 or 2"
+
